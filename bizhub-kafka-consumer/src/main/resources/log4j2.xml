@@ -29,12 +29,13 @@
 	<loggers>
 		<!-- 3rdparty Loggers -->
 		<logger name="com.bizhub" level="debug" />
-		<logger name="org.springframework" level="debug" />
+		<logger name="org.springframework" level="info" />
 		<logger name="com.atomikos" level="info" />
 		<logger name="com.alibaba" level="info" />
 		<logger name="com.netflix" level="info" />
 		<logger name="org.jboss" level="info" />
 		<logger name="org.apache" level="info" />
+		<logger name="org.apache.kafka" level="info" />
 
 		<!-- mybatis sql log -->
 		<logger name="org.apache.ibatis.jdbc.ScriptRunner" level="debug" />

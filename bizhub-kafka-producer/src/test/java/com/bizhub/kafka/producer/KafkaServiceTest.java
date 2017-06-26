@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.bizhub.common.TopicEnum;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath*:spring/applicationContext-kafka.xml", "classpath*:spring/applicationContext.xml" })
 public class KafkaServiceTest {
@@ -15,15 +17,16 @@ public class KafkaServiceTest {
     private static final Logger log = LoggerFactory.getLogger(KafkaServiceTest.class);
 
     @Autowired
-    private KafkaService kafkaService;
+    private KafkaProducerService kafkaService;
 
     @Test
-    public void testSaveNews() {
+    public void testSendMessage() {
         try {
 
             String message = "hello kafka!";
             log.debug("#{}", message);
-            kafkaService.sendMessage(message);
+            kafkaService.sendMessage(TopicEnum.SALES.getKey(), message);
+            kafkaService.sendMessage(TopicEnum.ITEM.getKey(), message);
 
         } catch (Exception e) {
             e.printStackTrace();

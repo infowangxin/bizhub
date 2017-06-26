@@ -5,6 +5,7 @@
 	+ 集成框架有：SpringMVC、log4j2、kafka；
 
 #### 包含工程有：
+* bizhub-common：公共类相关代码
 * bizhub-kafka-producer：Kafka消息生产者
 * bizhub-kafka-consumer：Kafka消息消费者 
 

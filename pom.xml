@@ -20,6 +20,11 @@
 	<dependencyManagement>
 
 		<dependencies>
+			<dependency>
+				<groupId>com.bizhub</groupId>
+				<artifactId>bizhub-common</artifactId>
+				<version>${site.version}</version>
+			</dependency>
 
 			<!-- spring -->
 			<dependency>
@@ -191,9 +196,9 @@
 
 			<!-- kafka -->
 			<dependency>
-				<groupId>org.springframework.kafka</groupId>
-				<artifactId>spring-kafka</artifactId>
-				<version>1.2.2.RELEASE</version>
+				<groupId>org.springframework.integration</groupId>
+				<artifactId>spring-integration-kafka</artifactId>
+				<version>2.1.1.RELEASE</version>
 			</dependency>
 
 			<!-- mybatis -->
@@ -484,5 +489,6 @@
 	<modules>
 		<module>bizhub-kafka-producer</module>
 		<module>bizhub-kafka-consumer</module>
+		<module>bizhub-common</module>
 	</modules>
 </project>

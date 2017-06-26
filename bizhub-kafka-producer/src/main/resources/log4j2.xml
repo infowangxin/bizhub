@@ -29,7 +29,7 @@
 	<loggers>
 		<!-- 3rdparty Loggers -->
 		<logger name="com.bizhub" level="debug" />
-		<logger name="org.springframework" level="debug" />
+		<logger name="org.springframework" level="info" />
 		<logger name="com.atomikos" level="info" />
 		<logger name="com.alibaba" level="info" />
 		<logger name="com.netflix" level="info" />
