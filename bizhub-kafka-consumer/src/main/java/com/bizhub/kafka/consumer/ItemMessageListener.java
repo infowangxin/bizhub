@@ -9,13 +9,6 @@ public class ItemMessageListener implements MessageListener<String, String> {
 
     protected final Logger log = LoggerFactory.getLogger(ItemMessageListener.class);
 
-    /**
-     * 监听器自动执行该方法
-     *  消费消息
-     *  自动提交offset
-     *  执行业务代码
-     *  （high level api 不提供offset管理，不能指定offset进行消费）
-     */
     @Override
     public void onMessage(ConsumerRecord<String, String> record) {
         log.info("=============ItemMessageListener开始消费=============");

@@ -25,9 +25,8 @@ public class KafkaServiceTest {
 
             String message = "hello kafka!";
             log.debug("#{}", message);
-            kafkaService.sendMessage(TopicEnum.SALES.getKey(), message);
-            kafkaService.sendMessage(TopicEnum.ITEM.getKey(), message);
-
+            kafkaService.sendMessage(TopicEnum.SALES, message);
+            kafkaService.sendMessage(TopicEnum.ITEM, message);
         } catch (Exception e) {
             e.printStackTrace();
         }

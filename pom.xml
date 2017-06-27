@@ -20,11 +20,6 @@
 	<dependencyManagement>
 
 		<dependencies>
-			<dependency>
-				<groupId>com.bizhub</groupId>
-				<artifactId>bizhub-common</artifactId>
-				<version>${site.version}</version>
-			</dependency>
 
 			<!-- spring -->
 			<dependency>
@@ -86,6 +81,39 @@
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-tx</artifactId>
 				<version>${spring.version}</version>
+			</dependency>
+
+			<!-- kafka -->
+			<dependency>
+				<groupId>org.apache.kafka</groupId>
+				<artifactId>kafka_2.10</artifactId>
+				<version>0.10.2.0</version>
+				<exclusions>
+					<exclusion>
+						<groupId>log4j</groupId>
+						<artifactId>log4j</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.slf4j</groupId>
+						<artifactId>slf4j-log4j12</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.kafka</groupId>
+				<artifactId>kafka-clients</artifactId>
+				<version>0.10.2.0</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.integration</groupId>
+				<artifactId>spring-integration-kafka</artifactId>
+				<!-- <version>2.1.1.RELEASE</version> -->
+				<version>1.3.1.RELEASE</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.kafka</groupId>
+				<artifactId>spring-kafka</artifactId>
+				<version>1.2.2.RELEASE</version>
 			</dependency>
 
 			<!-- atomikos tx -->
@@ -194,13 +222,6 @@
 				<version>3.4.0</version>
 			</dependency>
 
-			<!-- kafka -->
-			<dependency>
-				<groupId>org.springframework.integration</groupId>
-				<artifactId>spring-integration-kafka</artifactId>
-				<version>2.1.1.RELEASE</version>
-			</dependency>
-
 			<!-- mybatis -->
 			<dependency>
 				<groupId>org.mybatis</groupId>
@@ -225,6 +246,20 @@
 				<groupId>com.alibaba</groupId>
 				<artifactId>dubbo</artifactId>
 				<version>2.5.3</version>
+				<exclusions>
+					<exclusion>
+						<groupId>org.springframework</groupId>
+						<artifactId>spring</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.javassist</groupId>
+						<artifactId>javassist</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.jboss.netty</groupId>
+						<artifactId>netty</artifactId>
+					</exclusion>
+				</exclusions>
 			</dependency>
 
 			<!-- apache commons -->
@@ -233,31 +268,26 @@
 				<artifactId>commons-lang3</artifactId>
 				<version>3.5</version>
 			</dependency>
-
-			<!-- <dependency> -->
-			<!-- <groupId>commons-collections</groupId> -->
-			<!-- <artifactId>commons-collections</artifactId> -->
-			<!-- <version>3.2.2</version> -->
-			<!-- </dependency> -->
-
+			<dependency>
+				<groupId> org.apache.avro</groupId>
+				<artifactId>avro</artifactId>
+				<version>1.7.7</version>
+			</dependency>
 			<dependency>
 				<groupId>org.apache.commons</groupId>
 				<artifactId>commons-collections4</artifactId>
 				<version>4.1</version>
 			</dependency>
-
 			<dependency>
 				<groupId>commons-io</groupId>
 				<artifactId>commons-io</artifactId>
 				<version>2.5</version>
 			</dependency>
-
 			<dependency>
 				<groupId>org.apache.commons</groupId>
 				<artifactId>commons-pool2</artifactId>
 				<version>2.4.2</version>
 			</dependency>
-
 			<dependency>
 				<groupId>commons-codec</groupId>
 				<artifactId>commons-codec</artifactId>
@@ -347,6 +377,20 @@
 				<groupId>com.101tec</groupId>
 				<artifactId>zkclient</artifactId>
 				<version>0.10</version>
+				<exclusions>
+					<exclusion>
+						<groupId>org.slf4j</groupId>
+						<artifactId>slf4j-api</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.slf4j</groupId>
+						<artifactId>slf4j-log4j12</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>log4j</groupId>
+						<artifactId>log4j</artifactId>
+					</exclusion>
+				</exclusions>
 			</dependency>
 
 			<!-- httpclient -->
@@ -489,6 +533,5 @@
 	<modules>
 		<module>bizhub-kafka-producer</module>
 		<module>bizhub-kafka-consumer</module>
-		<module>bizhub-common</module>
 	</modules>
 </project>

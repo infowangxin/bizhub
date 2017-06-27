@@ -5,8 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.kafka.support.ProducerListener;
 
-@SuppressWarnings("rawtypes")
-public class KafkaProducerListener implements ProducerListener {
+public class KafkaProducerListener implements ProducerListener<String, String> {
 
     protected final Logger LOG = LoggerFactory.getLogger("kafkaProducer");
 
@@ -14,7 +13,7 @@ public class KafkaProducerListener implements ProducerListener {
      * 发送消息成功后调用
      */
     @Override
-    public void onSuccess(String topic, Integer partition, Object key, Object value, RecordMetadata recordMetadata) {
+    public void onSuccess(String topic, Integer partition, String key, String value, RecordMetadata recordMetadata) {
         LOG.info("==========kafka发送数据成功（日志开始）==========");
         LOG.info("----------topic:" + topic);
         LOG.info("----------partition:" + partition);
@@ -28,7 +27,7 @@ public class KafkaProducerListener implements ProducerListener {
      * 发送消息错误后调用
      */
     @Override
-    public void onError(String topic, Integer partition, Object key, Object value, Exception exception) {
+    public void onError(String topic, Integer partition, String key, String value, Exception exception) {
         LOG.info("==========kafka发送数据错误（日志开始）==========");
         LOG.info("----------topic:" + topic);
         LOG.info("----------partition:" + partition);

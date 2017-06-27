@@ -26,7 +26,7 @@
 
 	<bean id="salesMessageListener" class="com.bizhub.kafka.consumer.SalesMessageListener" />
 	<bean id="itemMessageListener" class="com.bizhub.kafka.consumer.ItemMessageListener" />
-	
+
 	<bean id="salesMessageListenerContainer" class="org.springframework.kafka.listener.KafkaMessageListenerContainer">
 		<constructor-arg ref="consumerFactory" />
 		<constructor-arg>
@@ -36,7 +36,7 @@
 			</bean>
 		</constructor-arg>
 	</bean>
-	
+
 	<bean id="itemMessageListenerContainer" class="org.springframework.kafka.listener.KafkaMessageListenerContainer">
 		<constructor-arg ref="consumerFactory" />
 		<constructor-arg>

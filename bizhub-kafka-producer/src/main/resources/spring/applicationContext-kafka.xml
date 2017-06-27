@@ -1,50 +1,36 @@
-<?xml version="1.0" encoding="UTF-8"?>  
-<beans xmlns="http://www.springframework.org/schema/beans"  
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
-       xmlns:int="http://www.springframework.org/schema/integration"  
-       xmlns:int-kafka="http://www.springframework.org/schema/integration/kafka" 
-       xmlns:context="http://www.springframework.org/schema/context" 
-       xsi:schemaLocation="http://www.springframework.org/schema/integration/kafka http://www.springframework.org/schema/integration/kafka/spring-integration-kafka.xsd  
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:int="http://www.springframework.org/schema/integration" xmlns:int-kafka="http://www.springframework.org/schema/integration/kafka"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/integration/kafka http://www.springframework.org/schema/integration/kafka/spring-integration-kafka.xsd  
         http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd  
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"> 
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
 
 	<context:property-placeholder location="classpath:config/kafka.properties" />
-	
-	<int:channel id="outWriteBackLemmaRecordChannel" />  
-  
-    <int-kafka:outbound-channel-adapter id="kafkaOutboundChannelAdapter"  
-                                        kafka-template="kafkaTemplate"  
-                                        auto-startup="true"  
-                                        channel="outWriteBackLemmaRecordChannel"  
-                                        order="3"  
-                                        topic="writeBackLemmaRecordTopic">  
-        <int-kafka:request-handler-advice-chain>  
-            <bean class="org.springframework.integration.handler.advice.RequestHandlerCircuitBreakerAdvice" />  
-        </int-kafka:request-handler-advice-chain>  
-    </int-kafka:outbound-channel-adapter>  
-  
-    <bean id="kafkaTemplate" class="org.springframework.kafka.core.KafkaTemplate">  
-        <constructor-arg>  
-            <bean class="org.springframework.kafka.core.DefaultKafkaProducerFactory">  
-                <constructor-arg>  
-                    <map>  
-                        <entry key="bootstrap.servers" value="${bootstrap.servers}"/>  
-                        <entry key="retries" value="${retries}"/>  
-                        <entry key="batch.size" value="${batch.size}"/>  
-                        <entry key="linger.ms" value="${linger.ms}"/>  
-                        <entry key="buffer.memory" value="${buffer.memory}"/>  
-                        <entry key="key.serializer" value="org.apache.kafka.common.serialization.IntegerSerializer"/>  
-                        <entry key="value.serializer" value="org.apache.kafka.common.serialization.StringSerializer"/>  
-                    </map>  
-                </constructor-arg>  
-            </bean>  
-        </constructor-arg>  
-        <constructor-arg name="autoFlush" value="true"/>  
-        <property name="defaultTopic" value="writeBackLemmaRecordTopic"/>  
-        <property name="producerListener" ref="producerListener"/>
-    </bean>  
-    
-    <bean id="producerListener" class="com.bizhub.kafka.producer.KafkaProducerListener" />
+
+	<bean id="kafkaTemplate" class="org.springframework.kafka.core.KafkaTemplate">
+		<constructor-arg>
+			<bean class="org.springframework.kafka.core.DefaultKafkaProducerFactory">
+				<constructor-arg>
+					<map>
+						<entry key="bootstrap.servers" value="${bootstrap.servers}" />
+						<entry key="group.id" value="0" />
+						<entry key="retries" value="1" />
+						<entry key="batch.size" value="16384" />
+						<entry key="linger.ms" value="1" />
+						<entry key="buffer.memory" value="33554432" />
+						<entry key="key.serializer" value="org.apache.kafka.common.serialization.StringSerializer" />
+						<entry key="value.serializer" value="org.apache.kafka.common.serialization.StringSerializer" />
+					</map>
+				</constructor-arg>
+			</bean>
+		</constructor-arg>
+		<constructor-arg name="autoFlush" value="true" />
+		<property name="defaultTopic" value="sales" />
+		<property name="producerListener" ref="producerListener" />
+	</bean>
+
+	<bean id="producerListener" class="com.bizhub.kafka.producer.KafkaProducerListener" />
 
 </beans>
