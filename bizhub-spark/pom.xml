@@ -1,12 +1,15 @@
 <?xml version="1.0"?>
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
 	<modelVersion>4.0.0</modelVersion>
+
 	<parent>
 		<groupId>com.bizhub</groupId>
 		<artifactId>bizhub</artifactId>
 		<version>${site.version}</version>
 	</parent>
-	<artifactId>bizhub-kafka-producer</artifactId>
+
+	<artifactId>bizhub-spark</artifactId>
 	<packaging>war</packaging>
 
 	<dependencies>
@@ -36,7 +39,7 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-expression</artifactId>
 		</dependency>
-		
+
 		<!-- aspectjweaver : spring aop要用到 -->
 		<dependency>
 			<groupId>org.aspectj</groupId>
@@ -59,6 +62,30 @@
 		<dependency>
 			<groupId>org.springframework.kafka</groupId>
 			<artifactId>spring-kafka</artifactId>
+		</dependency>
+
+		<!-- Scala -->
+		<dependency>
+			<groupId>org.scala-lang</groupId>
+			<artifactId>scala-library</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.scala-lang</groupId>
+			<artifactId>scala-compiler</artifactId>
+		</dependency>
+
+		<!-- spark -->
+		<dependency>
+			<groupId>org.apache.spark</groupId>
+			<artifactId>spark-core_2.11</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.spark</groupId>
+			<artifactId>spark-streaming_2.11</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.spark</groupId>
+			<artifactId>spark-streaming-kafka_2.11</artifactId>
 		</dependency>
 
 		<!-- atomikos tx -->
