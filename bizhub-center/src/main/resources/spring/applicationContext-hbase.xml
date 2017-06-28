@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context" xmlns:hdp="http://www.springframework.org/schema/hadoop" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/hadoop http://www.springframework.org/schema/hadoop/spring-hadoop.xsd">
+
+	<context:property-placeholder location="classpath*:/config/hbase.properties" />
+
+	<context:component-scan base-package="com.bizhub.hbase" />
+
+	<hdp:configuration id="hadoopConfiguration">
+		fs.defaultFS=hdfs://127.0.0.1:9000
+		dfs.replication=1
+		dfs.client.socket-timeout=600000
+	</hdp:configuration>
+
+	<!-- 当application Context关闭时，HBase中所有打开的连接都可以通过stop-proxy和delete-connetcion属性来调整。 -->
+	<!-- delete associated connections but do not stop the proxies stop-proxy="false" delete-connection="true" -->
+	<hdp:hbase-configuration configuration-ref="hadoopConfiguration" zk-quorum="${hbase.zk.host}" zk-port="${hbase.zk.port}" stop-proxy="false" delete-connection="false">
+		hbase.rootdir=hdfs://127.0.0.1:9000/hbase
+		dfs.replication=1
+		dfs.client.socket-timeout=600000
+	</hdp:hbase-configuration>
+
+	<bean id="hbaseTemplate" class="org.springframework.data.hadoop.hbase.HbaseTemplate">
+		<property name="configuration" ref="hbaseConfiguration" />
+		<property name="encoding" value="utf-8" />
+	</bean>
+
+	<!--spring-hbase.xml 有两种配置方式：一种是直接指定 HDFS 地址以及 ZooKeeper 的地址和端口号， 另外一种就是引入 HBase 配置文件 hbase-site.xml -->
+
+</beans>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:int="http://www.springframework.org/schema/integration" xmlns:int-kafka="http://www.springframework.org/schema/integration/kafka"
+	xmlns:task="http://www.springframework.org/schema/task" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/integration/kafka http://www.springframework.org/schema/integration/kafka/spring-integration-kafka.xsd
+		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<context:property-placeholder location="classpath:config/kafka.properties" />
+
+	<!-- 创建consumerFactory bean -->
+	<bean id="consumerFactory" class="org.springframework.kafka.core.DefaultKafkaConsumerFactory">
+		<constructor-arg>
+			<map>
+				<entry key="bootstrap.servers" value="${bootstrap.servers}" />
+				<entry key="group.id" value="${kafka.group.id}" />
+				<entry key="enable.auto.commit" value="${kafka.enable.auto.commit}" />
+				<entry key="auto.commit.interval.ms" value="${kafka.auto.commit.interval.ms}" />
+				<entry key="session.timeout.ms" value="${kafka.session.timeout.ms}" />
+				<entry key="key.deserializer" value="org.apache.kafka.common.serialization.StringDeserializer" />
+				<entry key="value.deserializer" value="org.apache.kafka.common.serialization.StringDeserializer" />
+			</map>
+		</constructor-arg>
+	</bean>
+
+	<bean id="itemMessageListener" class="com.bizhub.kafka.listener.consumer.ItemMessageListener" />
+
+	<bean id="itemMessageListenerContainer" class="org.springframework.kafka.listener.KafkaMessageListenerContainer">
+		<constructor-arg ref="consumerFactory" />
+		<constructor-arg>
+			<bean class="org.springframework.kafka.listener.config.ContainerProperties">
+				<constructor-arg name="topics" value="item" />
+				<property name="messageListener" ref="itemMessageListener" />
+			</bean>
+		</constructor-arg>
+	</bean>
+
+</beans>

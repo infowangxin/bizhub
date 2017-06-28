@@ -20,6 +20,11 @@
 	<dependencyManagement>
 
 		<dependencies>
+			<dependency>
+				<groupId>com.bizhub</groupId>
+				<artifactId>bizhub-api</artifactId>
+				<version>${site.version}</version>
+			</dependency>
 
 			<!-- spring -->
 			<dependency>
@@ -561,5 +566,7 @@
 		<module>bizhub-kafka-consumer</module>
 		<module>bizhub-spark</module>
 		<module>bizhub-hbase</module>
+		<module>bizhub-center</module>
+		<module>bizhub-api</module>
 	</modules>
 </project>
