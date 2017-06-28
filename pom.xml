@@ -158,6 +158,45 @@
 				<version>1.6.3</version>
 			</dependency>
 
+			<!-- hbase -->
+			<dependency>
+				<groupId>org.apache.hbase</groupId>
+				<artifactId>hbase-annotations</artifactId>
+				<version>1.2.6</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.hbase</groupId>
+				<artifactId>hbase-common</artifactId>
+				<version>1.2.6</version>
+				<exclusions>
+					<exclusion>
+						<groupId>org.slf4j</groupId>
+						<artifactId>slf4j-log4j12</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.hbase</groupId>
+				<artifactId>hbase-server</artifactId>
+				<version>1.2.6</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.hbase</groupId>
+				<artifactId>hbase-protocol</artifactId>
+				<version>1.2.6</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.hbase</groupId>
+				<artifactId>hbase-client</artifactId>
+				<version>1.2.6</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.data</groupId>
+				<artifactId>spring-data-hadoop</artifactId>
+				<version>2.4.0.RELEASE</version>
+				<!-- <version>1.0.1.RELEASE</version> -->
+			</dependency>
+
 			<!-- atomikos tx -->
 			<dependency>
 				<groupId>javax.transaction</groupId>
@@ -521,5 +560,6 @@
 		<module>bizhub-kafka-producer</module>
 		<module>bizhub-kafka-consumer</module>
 		<module>bizhub-spark</module>
+		<module>bizhub-hbase</module>
 	</modules>
 </project>
