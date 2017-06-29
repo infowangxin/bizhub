@@ -1,12 +1,11 @@
 # bizhub
+Business hub 简称bizhub, 业务总线
+
 `它是一个典型的MVC三层框架数据分析系统，用于公司里面的大数据分析。`
 
 `集成框架有：SpringMVC、log4j2、kafka、spark、hbase`
 
-
 ##### 环境准备
-
-
 |组件名|访问地址|版本号|
 |:----:|:----|:----|
 |kafka|127.0.0.1:2181、127.0.0.1:9092|kafka_2.10-0.10.2.1.tgz|
@@ -16,10 +15,12 @@
 ***
 
 #### 包含工程有：
-* bizhub-kafka-producer：Kafka消息生产者
-* bizhub-kafka-consumer：Kafka消息消费者 
-* bizhub-spark：集成spark的示例 
+* bizhub-api：公共类、工具类
+* bizhub-center：集成kafka、spark、hbase并附带示例
 * bizhub-hbase：集成hbase的示例 
+* bizhub-kafka-consumer：Kafka消息消费者示例
+* bizhub-kafka-producer：Kafka消息生产者示例
+* bizhub-spark：集成spark的示例 
 
 [GitHub](https://github.com/wangxinforme) [issues](https://github.com/wangxinforme/bizhub/issues)
 
