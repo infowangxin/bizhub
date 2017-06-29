@@ -49,7 +49,7 @@ import com.bizhub.hbase.serialization.StringHbaseSerializer;
  * 
  * @author jannal
  */
-@Service("hbaseService")
+@Service
 @SuppressWarnings("all")
 public class HbaseServiceImpl implements HbaseService {
 

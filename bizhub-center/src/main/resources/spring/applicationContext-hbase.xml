@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context" xmlns:hdp="http://www.springframework.org/schema/hadoop" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:util="http://www.springframework.org/schema/util"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-	http://www.springframework.org/schema/hadoop http://www.springframework.org/schema/hadoop/spring-hadoop.xsd">
+	http://www.springframework.org/schema/hadoop http://www.springframework.org/schema/hadoop/spring-hadoop.xsd
+	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
-	<context:property-placeholder location="classpath*:/config/hbase.properties" />
-
-	<context:component-scan base-package="com.bizhub.hbase" />
+	<util:properties id="p_hbase" location="classpath:/config/hbase.properties" />
 
 	<hdp:configuration id="hadoopConfiguration">
 		fs.defaultFS=hdfs://127.0.0.1:9000
@@ -16,7 +16,7 @@
 
 	<!-- 当application Context关闭时，HBase中所有打开的连接都可以通过stop-proxy和delete-connetcion属性来调整。 -->
 	<!-- delete associated connections but do not stop the proxies stop-proxy="false" delete-connection="true" -->
-	<hdp:hbase-configuration configuration-ref="hadoopConfiguration" zk-quorum="${hbase.zk.host}" zk-port="${hbase.zk.port}" stop-proxy="false" delete-connection="false">
+	<hdp:hbase-configuration configuration-ref="hadoopConfiguration" zk-quorum="#{p_hbase['hbase.zk.host']}" zk-port="#{p_hbase['hbase.zk.port']}" stop-proxy="false" delete-connection="false">
 		hbase.rootdir=hdfs://127.0.0.1:9000/hbase
 		dfs.replication=1
 		dfs.client.socket-timeout=600000
