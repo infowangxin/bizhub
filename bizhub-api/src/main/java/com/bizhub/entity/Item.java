@@ -5,7 +5,7 @@ import java.io.Serializable;
 import com.bizhub.hbase.common.annotation.Column;
 import com.bizhub.hbase.common.annotation.Table;
 
-@Table(tableName = "item", columnFamilyName = "gi")
+@Table(tableName = "item", columnFamilyName = "cfitem")
 public class Item implements Serializable {
 
     private static final long serialVersionUID = -7214626835388438946L;

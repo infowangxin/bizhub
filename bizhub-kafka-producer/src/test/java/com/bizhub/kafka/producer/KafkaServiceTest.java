@@ -31,7 +31,7 @@ public class KafkaServiceTest {
             item.setGoodsName("波司登T恤");
             String message = JSON.toJSONString(item);
             log.debug("#{}", message);
-            kafkaService.sendMessage(TopicEnum.SALES, message);
+            // kafkaService.sendMessage(TopicEnum.SALES, message);
             kafkaService.sendMessage(TopicEnum.ITEM, message);
         } catch (Exception e) {
             e.printStackTrace();
