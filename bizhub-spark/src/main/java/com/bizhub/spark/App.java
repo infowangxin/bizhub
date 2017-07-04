@@ -57,9 +57,9 @@ public class App {
 
     public static void main(String[] args) {
         SparkConf sparkConf = new SparkConf().setAppName("wordcount").setMaster("spark://127.0.0.1:7077");
-        // test1(sparkConf);
+        test1(sparkConf);
         // test2(sparkConf);
-        test3(sparkConf);
+        // test3(sparkConf);
     }
 
 }

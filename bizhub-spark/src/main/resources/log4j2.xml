@@ -31,6 +31,7 @@
 		<logger name="com.bizhub" level="debug" />
 		<logger name="org.springframework" level="info" />
 		<logger name="org.spark_project" level="info" />
+		<logger name="org.spark_project" level="info" />
 		<logger name="io.netty" level="info" />
 		<logger name="com.atomikos" level="info" />
 		<logger name="com.alibaba" level="info" />

@@ -24,15 +24,21 @@ public class KafkaServiceTest {
     @Test
     public void testSendMessage() {
         try {
-            Item item = new Item();
-            item.setItemId("0222000300000000003");
-            item.setBrandName("波司登");
-            item.setBusiName("波司登");
-            item.setGoodsName("波司登T恤");
-            String message = JSON.toJSONString(item);
-            log.debug("#{}", message);
-            // kafkaService.sendMessage(TopicEnum.SALES, message);
-            kafkaService.sendMessage(TopicEnum.ITEM, message);
+            
+            int i = 1;
+            do {
+                Item item = new Item();
+                item.setItemId("0222000300000000003");
+                item.setBrandName("波司登"+i);
+                item.setBusiName("波司登");
+                item.setGoodsName("波司登T恤");
+                String message = JSON.toJSONString(item);
+                log.debug("#{}", message);
+                // kafkaService.sendMessage(TopicEnum.SALES, message);
+                
+                kafkaService.sendMessage(TopicEnum.ITEM, message);
+                i++;
+            } while (i < 1000);
         } catch (Exception e) {
             e.printStackTrace();
         }
