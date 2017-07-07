@@ -8,15 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.alibaba.fastjson.JSON;
 import com.bizhub.common.TopicEnum;
-import com.bizhub.entity.Item;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath*:spring/applicationContext-kafka.xml", "classpath*:spring/applicationContext.xml" })
 public class KafkaServiceTest {
 
-    private static final Logger log = LoggerFactory.getLogger(KafkaServiceTest.class);
+    private static final Logger log = LoggerFactory.getLogger("com.bizhub.kafka.producer.KafkaServiceTest");
 
     @Autowired
     private KafkaProducerService kafkaService;
@@ -24,21 +22,13 @@ public class KafkaServiceTest {
     @Test
     public void testSendMessage() {
         try {
-            
-            int i = 1;
-            do {
-                Item item = new Item();
-                item.setItemId("0222000300000000003");
-                item.setBrandName("波司登"+i);
-                item.setBusiName("波司登");
-                item.setGoodsName("波司登T恤");
-                String message = JSON.toJSONString(item);
-                log.debug("#{}", message);
-                // kafkaService.sendMessage(TopicEnum.SALES, message);
-                
+
+            while (true) {
+                String message = "{\"serverPath\":\"\",\"localName\":\"[0:0:0:0:0:0:0:1]\",\"protocol\":\"HTTP/1.1\",\"requestURL\":\"http://localhost:8899/send\",\"visitDate\":\"2017-07-05 10:04:00.672\",\"serverName\":\"localhost\",\"remoteHost\":\"0:0:0:0:0:0:0:1\",\"schema\":\"http\",\"parameterMap\":{},\"serverPort\":8899,\"requestURI\":\"/send\",\"localPort\":8899,\"remotePort\":58953,\"method\":\"POST\",\"localAddr\":\"0:0:0:0:0:0:0:1\",\"remoteAddr\":\"0:0:0:0:0:0:0:1\"}";
+                log.debug("{}", message);
                 kafkaService.sendMessage(TopicEnum.ITEM, message);
-                i++;
-            } while (i < 1000);
+                Thread.sleep(5000);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

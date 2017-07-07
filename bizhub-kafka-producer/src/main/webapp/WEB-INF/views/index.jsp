@@ -30,9 +30,14 @@
 				<div class="ibox float-e-margins ">
 					<div class="ibox-content p-t-slg">
 						<form class="form-horizontal"method="post">
+						<div class="form-group">
+								<div class="col-sm-4 col-sm-offset-2">
+									<input name="keywords">
+								</div>
+							</div>
 							<div class="form-group">
 								<div class="col-sm-4 col-sm-offset-2">
-									<button class="btn btn-primary send-btn" type="button">
+									<button class="btn btn-primary" type="submit">
 										发送kafka消息
 									</button>
 								</div>

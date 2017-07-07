@@ -21,7 +21,7 @@ public class KafkaProducerService {
     // private MessageChannel channel;
 
     public void sendMessage(TopicEnum topic, String message) {
-        logger.info("# topic = {}, message = {}", topic.getKey(), message);
+        logger.debug("# topic = {}, message = {}", topic.getKey(), message);
         // kafkaTemplate.setDefaultTopic(topic.getKey());
         // kafkaTemplate.sendDefault(message);
         kafkaTemplate.send(topic.getKey(), message);

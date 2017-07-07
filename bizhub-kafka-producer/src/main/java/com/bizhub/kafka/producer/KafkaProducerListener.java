@@ -7,20 +7,20 @@ import org.springframework.kafka.support.ProducerListener;
 
 public class KafkaProducerListener implements ProducerListener<String, String> {
 
-    protected final Logger LOG = LoggerFactory.getLogger("kafkaProducer");
+    protected final Logger LOG = LoggerFactory.getLogger(KafkaProducerListener.class);
 
     /**
      * 发送消息成功后调用
      */
     @Override
     public void onSuccess(String topic, Integer partition, String key, String value, RecordMetadata recordMetadata) {
-        LOG.info("==========kafka发送数据成功（日志开始）==========");
-        LOG.info("----------topic:" + topic);
-        LOG.info("----------partition:" + partition);
-        LOG.info("----------key:" + key);
-        LOG.info("----------value:" + value);
-        LOG.info("----------RecordMetadata:" + recordMetadata);
-        LOG.info("~~~~~~~~~~kafka发送数据成功（日志结束）~~~~~~~~~~");
+        LOG.debug("==========kafka发送数据成功（日志开始）==========");
+        LOG.debug("----------topic:" + topic);
+        LOG.debug("----------partition:" + partition);
+        LOG.debug("----------key:" + key);
+        LOG.debug("----------value:" + value);
+        LOG.debug("----------RecordMetadata:" + recordMetadata);
+        LOG.debug("~~~~~~~~~~kafka发送数据成功（日志结束）~~~~~~~~~~");
     }
 
     /**
@@ -28,13 +28,13 @@ public class KafkaProducerListener implements ProducerListener<String, String> {
      */
     @Override
     public void onError(String topic, Integer partition, String key, String value, Exception exception) {
-        LOG.info("==========kafka发送数据错误（日志开始）==========");
-        LOG.info("----------topic:" + topic);
-        LOG.info("----------partition:" + partition);
-        LOG.info("----------key:" + key);
-        LOG.info("----------value:" + value);
-        LOG.info("----------Exception:" + exception);
-        LOG.info("~~~~~~~~~~kafka发送数据错误（日志结束）~~~~~~~~~~");
+        LOG.debug("==========kafka发送数据错误（日志开始）==========");
+        LOG.debug("----------topic:" + topic);
+        LOG.debug("----------partition:" + partition);
+        LOG.debug("----------key:" + key);
+        LOG.debug("----------value:" + value);
+        LOG.debug("----------Exception:" + exception);
+        LOG.debug("~~~~~~~~~~kafka发送数据错误（日志结束）~~~~~~~~~~");
         exception.printStackTrace();
     }
 
@@ -43,7 +43,7 @@ public class KafkaProducerListener implements ProducerListener<String, String> {
      */
     @Override
     public boolean isInterestedInSuccess() {
-        LOG.info("///kafkaProducer监听器启动///");
+        LOG.debug("///kafkaProducer监听器启动///");
         return true;
     }
 
