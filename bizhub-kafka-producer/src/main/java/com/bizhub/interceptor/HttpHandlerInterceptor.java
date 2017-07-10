@@ -53,9 +53,9 @@ public class HttpHandlerInterceptor implements HandlerInterceptor {
 
         // 构造 map
         Map<String, Object> map = new HashMap<>();
-                
-        map.put("requestHeaderMap", request.getParameterMap());
-        map.put("responseHeaderMap", request.getParameterMap());
+
+        // map.put("requestHeaderMap", request.getParameterMap());
+        // map.put("responseHeaderMap", request.getParameterMap());
         map.put("serverName", serverName);
         map.put("serverPort", serverPort);
         map.put("serverPath", serverPath);
