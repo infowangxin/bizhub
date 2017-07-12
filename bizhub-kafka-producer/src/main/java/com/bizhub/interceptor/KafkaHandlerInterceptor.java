@@ -20,9 +20,9 @@ import com.bizhub.common.TopicEnum;
 import com.bizhub.kafka.producer.KafkaProducerService;
 
 @SuppressWarnings("all")
-public class HttpHandlerInterceptor implements HandlerInterceptor {
+public class KafkaHandlerInterceptor implements HandlerInterceptor {
 
-    public static final Logger log = LoggerFactory.getLogger(HttpHandlerInterceptor.class);
+    public static final Logger log = LoggerFactory.getLogger(KafkaHandlerInterceptor.class);
 
     @Autowired
     private KafkaProducerService kafkaService;
