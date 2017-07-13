@@ -29,54 +29,58 @@ public class KafkaHandlerInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        String serverName = request.getServerName();
-        Integer serverPort = request.getServerPort();
-        String serverPath = request.getContextPath();
+        try {
+            String serverName = request.getServerName();
+            Integer serverPort = request.getServerPort();
+            String serverPath = request.getContextPath();
 
-        String localName = request.getLocalName();
-        String localAddr = request.getLocalAddr();
-        Integer localPort = request.getLocalPort();
+            String localName = request.getLocalName();
+            String localAddr = request.getLocalAddr();
+            Integer localPort = request.getLocalPort();
 
-        String remoteHost = request.getRemoteHost(); // 客户端主机名
-        String remoteAddr = request.getRemoteAddr(); // 客户端ip地址
-        Integer remotePort = request.getRemotePort(); // 客户端端口号
+            String remoteHost = request.getRemoteHost(); // 客户端主机名
+            String remoteAddr = request.getRemoteAddr(); // 客户端ip地址
+            Integer remotePort = request.getRemotePort(); // 客户端端口号
 
-        String protocol = request.getProtocol();
-        String schema = request.getScheme();
+            String protocol = request.getProtocol();
+            String schema = request.getScheme();
 
-        String method = request.getMethod();
-        Map<String, String[]> parameterMap = request.getParameterMap();
-        String queryString = request.getQueryString();
+            String method = request.getMethod();
+            Map<String, String[]> parameterMap = request.getParameterMap();
+            String queryString = request.getQueryString();
 
-        String requestURI = request.getRequestURI();
-        String requestURL = request.getRequestURL().toString();
+            String requestURI = request.getRequestURI();
+            String requestURL = request.getRequestURL().toString();
 
-        // 构造 map
-        Map<String, Object> map = new HashMap<>();
+            // 构造 map
+            Map<String, Object> map = new HashMap<>();
 
-        // map.put("requestHeaderMap", request.getParameterMap());
-        // map.put("responseHeaderMap", request.getParameterMap());
-        map.put("serverName", serverName);
-        map.put("serverPort", serverPort);
-        map.put("serverPath", serverPath);
-        map.put("localName", localName);
-        map.put("localAddr", localAddr);
-        map.put("localPort", localPort);
-        map.put("remoteHost", remoteHost);
-        map.put("remoteAddr", remoteAddr);
-        map.put("remotePort", remotePort);
-        map.put("protocol", protocol);
-        map.put("schema", schema);
-        map.put("method", method);
-        map.put("parameterMap", parameterMap);
-        map.put("queryString", queryString);
-        map.put("requestURI", requestURI);
-        map.put("requestURL", requestURL);
-        map.put("visitDate", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(Calendar.getInstance().getTime()));
+            // map.put("requestHeaderMap", request.getParameterMap());
+            // map.put("responseHeaderMap", request.getParameterMap());
+            map.put("serverName", serverName);
+            map.put("serverPort", serverPort);
+            map.put("serverPath", serverPath);
+            map.put("localName", localName);
+            map.put("localAddr", localAddr);
+            map.put("localPort", localPort);
+            map.put("remoteHost", remoteHost);
+            map.put("remoteAddr", remoteAddr);
+            map.put("remotePort", remotePort);
+            map.put("protocol", protocol);
+            map.put("schema", schema);
+            map.put("method", method);
+            map.put("parameterMap", parameterMap);
+            map.put("queryString", queryString);
+            map.put("requestURI", requestURI);
+            map.put("requestURL", requestURL);
+            map.put("visitDate", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(Calendar.getInstance().getTime()));
 
-        String message = JSON.toJSONString(map, true);
-        log.info("#{}", message);
-        kafkaService.sendMessage(TopicEnum.ITEM, message);
+            String message = JSON.toJSONString(map, true);
+            log.info("#{}", message);
+            kafkaService.sendMessage(TopicEnum.ITEM, message);
+        } catch (Throwable e) {
+            log.error("# send kafka message fail , {}", e.getLocalizedMessage());
+        }
         return true;
     }
 
