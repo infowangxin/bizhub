@@ -23,5 +23,3 @@ Business hub 简称bizhub, 业务总线
 * bizhub-spark：集成spark的示例 
 
 [GitHub](https://github.com/wangxinforme) [issues](https://github.com/wangxinforme/bizhub/issues)
-
-![Markdown](http://wx4.sinaimg.cn/mw690/005OXyHfgy1fh6evxykwhj30ag0as3zv.jpg)
